@@ -20,11 +20,11 @@ export const Header = () => {
 
   return (
     <>
-      <div className="text-xl font-bold" style={{ color: "#2988A6" }}>
+      <div className="text-xl font-bold mx-8" style={{ color: "#2988A6" }}>
         Hello Lidia,
       </div>
       <div className="flex flex-col space-y-1 border-black border-t border-b w-screen py-3">
-        <div className="flex space-x-4 flex-wrap">
+        <div className="flex space-x-4 flex-wrap mx-8">
           <div
             className=" rounded-lg px-2 text-sm"
             style={{ backgroundColor: "#F0F294" }}
@@ -38,7 +38,7 @@ export const Header = () => {
             Phase I
           </div>
         </div>
-        <div className="flex space-x-4 flex-wrap">
+        <div className="flex space-x-4 flex-wrap mx-8">
           <div
             className="rounded-lg px-2 mt-2 text-sm"
             style={{ backgroundColor: "#D6D7BE" }}

@@ -1,27 +1,39 @@
 import React, { useState } from "react";
 
-import { Saturation, Hue, useColor, Alpha } from "react-color-palette";
-import "react-color-palette/css";
-
 import { Header } from "./components/header";
 import { Tabs } from "./components/tabs";
 import { Grass } from "./components/grass";
 
 const ColorChanger = () => {
-  const [skyColor, setSkyColor] = useState("#1e91cb"); // default blue
-  const [grassColor, setGrassColor] = useState("#00ff00"); // default green
+  const [colors, setColors] = useState();
 
-  const [color, setColor] = useColor("#561ecb");
+  const [view, setView] = useState("edit");
 
   const applyChanges = () => {
-    // Apply the color changes to your UI
+    setView("review");
   };
 
-  console.log(color);
+  const editButton = () => {
+    setView("edit");
+  };
 
-  const buildRGBA = () => {
+  const sendButton = () => {
+    setView("sent");
+
+    window.setTimeout(() => {
+      setView("task_done");
+    }, 5000);
+  };
+
+  const buildRGBA = (color) => {
     return `rgba(${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b}, ${color.rgb.a})`;
   };
+
+  if (view === "sent") {
+  }
+
+  if (view === "task_done") {
+  }
 
   return (
     <div className="flex flex-col justify-center p4 my-8 items-start space-y-4">
@@ -35,7 +47,9 @@ const ColorChanger = () => {
           <div
             className=""
             style={{
-              backgroundColor: buildRGBA(),
+              backgroundColor: colors?.skyColor
+                ? buildRGBA(colors.skyColor)
+                : "#fff",
               maxWidth: "290px",
               overflow: "hidden",
             }}
@@ -43,26 +57,55 @@ const ColorChanger = () => {
             <img src="/sky2.png" />
           </div>
           <div className="" style={{ marginTop: "-25px" }}>
-            <Grass color={buildRGBA()} />
+            <Grass
+              color={colors?.grassColor ? buildRGBA(colors.grassColor) : "#fff"}
+            />
           </div>
         </div>
-        <p className="text-neutral-500 text-sm">
-          Use the slider below to make your selection
-        </p>
 
-        <Tabs />
+        {view === "edit" && (
+          <>
+            <p className="text-neutral-500 text-sm">
+              Use the slider below to make your selection
+            </p>
 
-        <div className="flex flex-col w-full space-y-4">
-          <Hue color={color} onChange={setColor} />
-          <Alpha color={color} onChange={setColor} />
-        </div>
+            <Tabs
+              onColorChange={(colors) => {
+                setColors(colors);
+              }}
+            />
 
-        <button
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-          onClick={applyChanges}
-        >
-          Apply Changes
-        </button>
+            <button
+              className="bg-btn-bg hover:bg-btn-outline border-btn-outline border text-btn-text font-bold py-2 px-4 rounded-md text-md"
+              onClick={applyChanges}
+            >
+              Apply Changes
+            </button>
+          </>
+        )}
+
+        {view === "review" && (
+          <>
+            <span className=" text-md">
+              Ready to share it with your{" "}
+              <span className="text-bold text-violet-900">Penpal?</span>
+            </span>
+
+            <button
+              className="bg-btn-bg hover:bg-btn-outline border-btn-outline border text-btn-text font-bold py-2 px-4 rounded-md text-md"
+              onClick={editButton}
+            >
+              Edit
+            </button>
+
+            <button
+              className="bg-btn-bg hover:bg-btn-outline border-btn-outline border text-btn-text font-bold py-2 px-4 rounded-md text-md"
+              onClick={sendButton}
+            >
+              Send to PNPL
+            </button>
+          </>
+        )}
       </div>
     </div>
   );

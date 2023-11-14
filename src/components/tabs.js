@@ -1,32 +1,47 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+
+import { Saturation, Hue, useColor, Alpha } from "react-color-palette";
+import "react-color-palette/css";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export function Tabs() {
-  const [tabs, setTabs] = useState([
-    { name: "Sky", current: true },
-    { name: "Grass", current: false },
-  ]);
+export function Tabs({ onColorChange }) {
+  const [skyColor, setSkyColor] = useColor("#1e91cb"); // default blue
+  const [grassColor, setGrassColor] = useColor("#00ff00"); // default green
+  const [currentColor, setCurrentColor] = useState("Sky");
+
+  const [tabs, setTabs] = useState([{ name: "Sky" }, { name: "Grass" }]);
 
   const handleClick = (tab) => {
-    const newTabs = JSON.parse(JSON.stringify(tabs));
-
-    if (tab.current) {
-      return;
-    }
-
-    for (let i = 0; i < newTabs.length; i++) {
-      newTabs[i].current = newTabs[i].name === tab.name;
-    }
-
-    setTabs([...newTabs]);
+    setCurrentColor(tab.name);
   };
 
-  console.log(tabs);
+  const setColor = (color) => {
+    if (currentColor === "Sky") {
+      setSkyColor(color);
+      onColorChange({ grassColor, skyColor: color });
+    } else {
+      setGrassColor(color);
+      onColorChange({ grassColor: color, skyColor });
+    }
+  };
+
+  const getCurrentColor = () => {
+    if (currentColor === "Sky") {
+      return skyColor;
+    }
+
+    return grassColor;
+  };
+
+  useEffect(() => {
+    onColorChange({ grassColor, skyColor });
+  }, []);
+
   return (
-    <div>
+    <div className="w-full flex flex-col items-center space-y-4">
       <div className="sm:block">
         <nav className="flex space-x-4" aria-label="Tabs">
           {tabs.map((tab) => (
@@ -34,12 +49,11 @@ export function Tabs() {
               key={tab.name}
               href={tab.href}
               className={classNames(
-                tab.current
+                tab.name === currentColor
                   ? "bg-black text-white"
                   : "text-gray-500 hover:text-gray-700",
                 "rounded-md px-3 py-2 text-sm font-medium"
               )}
-              aria-current={tab.current ? "page" : undefined}
               onClick={() => {
                 handleClick(tab);
               }}
@@ -48,6 +62,11 @@ export function Tabs() {
             </a>
           ))}
         </nav>
+      </div>
+
+      <div className="flex flex-col w-full space-y-4">
+        <Hue color={getCurrentColor()} onChange={setColor} />
+        <Alpha color={getCurrentColor()} onChange={setColor} />
       </div>
     </div>
   );
