@@ -20,19 +20,37 @@ export const Header = () => {
 
   return (
     <>
-      <div className="text-xl font-bold">Hello Lidia,</div>
-      <div className="flex flex-col space-y-1 border-t-1 border border-b-1">
+      <div className="text-xl font-bold" style={{ color: "#2988A6" }}>
+        Hello Lidia,
+      </div>
+      <div className="flex flex-col space-y-1 border-black border-t border-b w-screen py-3">
         <div className="flex space-x-4 flex-wrap">
-          <div className="bg-yellow-500 rounded-lg px-2 mt-2 ">
+          <div
+            className=" rounded-lg px-2 text-sm"
+            style={{ backgroundColor: "#F0F294" }}
+          >
             {currentDate}
           </div>
-          <div className="bg-yellow-500 rounded-lg px-2 mt-2">Phase I</div>
+          <div
+            className="rounded-lg px-2 text-sm"
+            style={{ backgroundColor: "#F2CD94" }}
+          >
+            Phase I
+          </div>
         </div>
         <div className="flex space-x-4 flex-wrap">
-          <div className="bg-yellow-500 rounded-lg px-2 mt-2">
+          <div
+            className="rounded-lg px-2 mt-2 text-sm"
+            style={{ backgroundColor: "#D6D7BE" }}
+          >
             {currentTime}
           </div>
-          <div className="bg-yellow-500 rounded-lg px-2 mt-2">Task 1/2</div>
+          <div
+            className="rounded-lg px-2 mt-2 text-sm"
+            style={{ backgroundColor: "#94C5F2" }}
+          >
+            Task 1/2
+          </div>
         </div>
       </div>
     </>

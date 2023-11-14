@@ -15,24 +15,40 @@ const ColorChanger = () => {
     // Apply the color changes to your UI
   };
 
+  console.log(color);
+
+  const buildRGBA = () => {
+    return `rgba(${color.rgb.r}, ${color.rgb.g}, ${color.rgb.b}, ${color.rgb.a})`;
+  };
+
   return (
-    <div className="flex flex-col justify-center p4 my-8 mx-8 items-start space-y-4">
+    <div className="flex flex-col justify-center p4 my-8 items-start space-y-4">
       <Header />
-      <div className="">
-        If you could change the color of the sky and the grass. How would it
-        look like?
+      <div className="flex flex-col justify-center p4 my-8 items-center space-y-4 mx-8">
+        <div className="">
+          If you could change the color of the <b>sky</b> and the <b>grass</b>.
+          What would it look like?
+        </div>
+        <div className="">
+          <div className="" style={{ backgroundColor: buildRGBA() }}>
+            <img src="/sky.png" />
+          </div>
+        </div>
+        <p className="text-neutral-500 text-sm">
+          Use the slider below to make your selection
+        </p>
+
+        <div className="flex flex-col w-full space-y-4">
+          <Hue color={color} onChange={setColor} />
+          <Alpha color={color} onChange={setColor} />
+        </div>
+        <button
+          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          onClick={applyChanges}
+        >
+          Apply Changes
+        </button>
       </div>
-      {/* Illustration goes here */}
-      <div className="flex flex-col w-full space-y-4">
-        <Hue color={color} onChange={setColor} />
-        <Alpha color={color} onChange={setColor} />
-      </div>
-      <button
-        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-        onClick={applyChanges}
-      >
-        Apply Changes
-      </button>
     </div>
   );
 };
