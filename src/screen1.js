@@ -4,9 +4,11 @@ import { Saturation, Hue, useColor, Alpha } from "react-color-palette";
 import "react-color-palette/css";
 
 import { Header } from "./components/header";
+import { Tabs } from "./components/tabs";
+import { Grass } from "./components/grass";
 
 const ColorChanger = () => {
-  const [skyColor, setSkyColor] = useState("#0000ff"); // default blue
+  const [skyColor, setSkyColor] = useState("#1e91cb"); // default blue
   const [grassColor, setGrassColor] = useState("#00ff00"); // default green
 
   const [color, setColor] = useColor("#561ecb");
@@ -30,18 +32,31 @@ const ColorChanger = () => {
           What would it look like?
         </div>
         <div className="">
-          <div className="" style={{ backgroundColor: buildRGBA() }}>
-            <img src="/sky.png" />
+          <div
+            className=""
+            style={{
+              backgroundColor: buildRGBA(),
+              maxWidth: "290px",
+              overflow: "hidden",
+            }}
+          >
+            <img src="/sky2.png" />
+          </div>
+          <div className="" style={{ marginTop: "-25px" }}>
+            <Grass color={buildRGBA()} />
           </div>
         </div>
         <p className="text-neutral-500 text-sm">
           Use the slider below to make your selection
         </p>
 
+        <Tabs />
+
         <div className="flex flex-col w-full space-y-4">
           <Hue color={color} onChange={setColor} />
           <Alpha color={color} onChange={setColor} />
         </div>
+
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
           onClick={applyChanges}
