@@ -7,9 +7,17 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-export function Tabs({ onColorChange }) {
-  const [skyColor, setSkyColor] = useColor("#1e91cb"); // default blue
-  const [grassColor, setGrassColor] = useColor("#00ff00"); // default green
+export function Tabs({
+  onColorChange,
+  skyColor: initialSkyColor,
+  grassColor: initialGrassColor,
+}) {
+  const [skyColor, setSkyColor] = useColor(
+    initialSkyColor ? initialSkyColor.hex : "#1e91cb"
+  ); // default blue
+  const [grassColor, setGrassColor] = useColor(
+    initialGrassColor ? initialGrassColor.hex : "#00ff00"
+  ); // default green
   const [currentColor, setCurrentColor] = useState("Sky");
 
   const [tabs, setTabs] = useState([{ name: "Sky" }, { name: "Grass" }]);

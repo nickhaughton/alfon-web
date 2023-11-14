@@ -22,7 +22,11 @@ const ColorChanger = () => {
 
     window.setTimeout(() => {
       setView("task_done");
-    }, 5000);
+    }, 4000);
+  };
+
+  const backHomeButton = () => {
+    setView("edit");
   };
 
   const buildRGBA = (color) => {
@@ -30,9 +34,32 @@ const ColorChanger = () => {
   };
 
   if (view === "sent") {
+    return (
+      <div className="flex flex-col justify-center items-center space-y-10 bg-white py-40">
+        <p className="text-pnpl text-lg font-bold">Sent to ur PNPL ;-)</p>
+        <img src="/pnpl.png" />
+      </div>
+    );
   }
 
   if (view === "task_done") {
+    return (
+      <div className="flex flex-col justify-center items-center space-y-6 bg-completed py-40 w-screen h-screen">
+        <div className="flex flex-col justify-center items-center space-y-4 ">
+          <p className="text-phase text-lg font-bold">Phase I</p>
+          <p className="text-day text-lg font-bold rounded-full px-4 bg-white">
+            Day 2 / 30
+          </p>
+        </div>
+        <span className="text-green-check text-lg font-bold flex space-x-2 items-center">
+          <p>Completed</p> <img src="/check.png" className="w-4 h-4" />
+        </span>
+
+        <button className="underline text-phase" onClick={backHomeButton}>
+          Home
+        </button>
+      </div>
+    );
   }
 
   return (
@@ -43,20 +70,18 @@ const ColorChanger = () => {
           If you could change the color of the <b>sky</b> and the <b>grass</b>.
           What would it look like?
         </div>
-        <div className="">
+        <div className="rounded-t-2xl overflow-hidden">
           <div
             className=""
             style={{
               backgroundColor: colors?.skyColor
                 ? buildRGBA(colors.skyColor)
                 : "#fff",
-              maxWidth: "290px",
-              overflow: "hidden",
             }}
           >
             <img src="/sky2.png" />
           </div>
-          <div className="" style={{ marginTop: "-25px" }}>
+          <div className="" style={{ marginTop: "-25px", width: "287px" }}>
             <Grass
               color={colors?.grassColor ? buildRGBA(colors.grassColor) : "#fff"}
             />
@@ -73,6 +98,8 @@ const ColorChanger = () => {
               onColorChange={(colors) => {
                 setColors(colors);
               }}
+              skyColor={colors?.skyColor}
+              grassColor={colors?.grassColor}
             />
 
             <button
