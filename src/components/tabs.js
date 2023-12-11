@@ -49,7 +49,7 @@ export function Tabs({
   }, []);
 
   return (
-    <div className="w-full flex flex-col items-center space-y-4">
+    <div className="w-full flex flex-col items-center space-y-1">
       <div className="sm:block">
         <nav className="flex space-x-4" aria-label="Tabs">
           {tabs.map((tab) => (
@@ -58,9 +58,9 @@ export function Tabs({
               href={tab.href}
               className={classNames(
                 tab.name === currentColor
-                  ? "bg-black text-white"
+                  ? "bg-pnpl text-white"
                   : "text-gray-500 hover:text-gray-700",
-                "rounded-md px-3 py-2 text-sm font-medium"
+                "rounded-md px-2 py-2 text-sm font-medium"
               )}
               onClick={() => {
                 handleClick(tab);
@@ -72,9 +72,11 @@ export function Tabs({
         </nav>
       </div>
 
-      <div className="flex flex-col w-full space-y-4">
-        <Hue color={getCurrentColor()} onChange={setColor} />
-        <Alpha color={getCurrentColor()} onChange={setColor} />
+      <div className="bg-white py-4 px-4 border border-border w-full flex flex-col rounded-md drop-shadow-sm">
+        <div className="flex flex-col w-full space-y-4">
+          <Hue color={getCurrentColor()} onChange={setColor} />
+          <Alpha color={getCurrentColor()} onChange={setColor} />
+        </div>
       </div>
     </div>
   );
