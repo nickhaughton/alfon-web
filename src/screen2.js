@@ -157,13 +157,6 @@ const Main = () => {
       <div className="">
         <div className="rounded-t-2xl flex flex-col space-y-4">
           <div className="flex flex-col justify-center items-center relative">
-            {/* <P5Sketch
-              isRecording={recordingState === "recording"}
-              recordingComplete={(blob) => {
-                setBlob(blob);
-              }}
-            /> */}
-
             {recordingState === "none" && <img src="/reference.png" />}
             {recordingState === "none" && (
               <div className="absolute">
@@ -193,17 +186,26 @@ const Main = () => {
               </div>
             )}
             {recordingState === "recording" && (
-              <div
-                className="absolute top-px right-px flex space-x-4"
-                onClick={() => {
-                  setRecordingState("stopped");
-                }}
-              >
-                <div>
-                  <span className="text-white">stop recording</span>
+              <>
+                <P5Sketch
+                  isRecording={recordingState === "recording"}
+                  recordingComplete={(blob) => {
+                    setBlob(blob);
+                  }}
+                />
+
+                <div
+                  className="absolute top-px right-px flex space-x-4"
+                  onClick={() => {
+                    setRecordingState("stopped");
+                  }}
+                >
+                  <div>
+                    <span className="text-white">stop recording</span>
+                  </div>
+                  <span className="text-white">{formatTime(seconds)}</span>
                 </div>
-                <span className="text-white">{formatTime(seconds)}</span>
-              </div>
+              </>
             )}
           </div>
         </div>
