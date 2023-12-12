@@ -26,13 +26,23 @@ export function Tabs({
     setCurrentColor(tab.name);
   };
 
+  const sendColor = (grassColor, skyColor) => {
+    if (grassColor.hex !== "#00ff00" && skyColor.hex !== "#1e91cb") {
+      onColorChange({ grassColor, skyColor });
+    } else if (grassColor.hex !== "#00ff00") {
+      onColorChange({ grassColor });
+    } else if (skyColor.hex !== "#1e91cb") {
+      onColorChange({ skyColor });
+    }
+  };
+
   const setColor = (color) => {
     if (currentColor === "Sky") {
       setSkyColor(color);
-      onColorChange({ grassColor, skyColor: color });
+      sendColor(grassColor, color);
     } else {
       setGrassColor(color);
-      onColorChange({ grassColor: color, skyColor });
+      sendColor(color, skyColor);
     }
   };
 
@@ -44,9 +54,11 @@ export function Tabs({
     return grassColor;
   };
 
-  useEffect(() => {
-    onColorChange({ grassColor, skyColor });
-  }, []);
+  // useEffect(() => {
+  //   onColorChange({ grassColor, skyColor });
+  // }, []);
+
+  console.log(getCurrentColor());
 
   return (
     <div className="w-full flex flex-col items-center space-y-1  border border-border rounded-md drop-shadow-sm pt-4">

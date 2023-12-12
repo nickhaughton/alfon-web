@@ -128,7 +128,7 @@ const Main = () => {
             style={{
               backgroundColor: colors?.skyColor
                 ? buildRGBA(colors.skyColor)
-                : "#fff",
+                : "#484856",
             }}
           >
             <img className="w-full" src="/sky2.png" />
@@ -145,7 +145,9 @@ const Main = () => {
           </div> */}
           <div className="" style={{ marginTop: "-25px" }}>
             <Grass
-              color={colors?.grassColor ? buildRGBA(colors.grassColor) : "#fff"}
+              color={
+                colors?.grassColor ? buildRGBA(colors.grassColor) : "#484856"
+              }
             />
           </div>
 
