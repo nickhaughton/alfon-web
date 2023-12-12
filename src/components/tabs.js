@@ -49,8 +49,8 @@ export function Tabs({
   }, []);
 
   return (
-    <div className="w-full flex flex-col items-center space-y-1">
-      <div className="sm:block">
+    <div className="w-full flex flex-col items-center space-y-1  border border-border rounded-md drop-shadow-sm pt-4">
+      <div className="">
         <nav className="flex space-x-4" aria-label="Tabs">
           {tabs.map((tab) => (
             <a
@@ -72,7 +72,7 @@ export function Tabs({
         </nav>
       </div>
 
-      <div className="bg-white py-4 px-4 border border-border w-full flex flex-col rounded-md drop-shadow-sm">
+      <div className="bg-white py-4 px-4 w-full flex flex-col  ">
         <div className="flex flex-col w-full space-y-4">
           <Hue color={getCurrentColor()} onChange={setColor} />
           {/* <Alpha color={getCurrentColor()} onChange={setColor} /> */}

@@ -25,8 +25,8 @@ const Main = () => {
   useEffect(() => {
     if (recordingState === "recording") {
       const interval = setInterval(() => {
-        setSeconds((seconds) => seconds + 1);
-      }, 1000);
+        setSeconds((seconds) => seconds + 50);
+      }, 50);
 
       return () => clearInterval(interval);
     }
@@ -41,7 +41,16 @@ const Main = () => {
   };
 
   const handlePlay = () => {
-    setRecordingState("started");
+    navigator.mediaDevices
+      .getUserMedia({
+        audio: false,
+        video: {
+          facingMode: "user",
+        },
+      })
+      .then(() => {
+        setRecordingState("started");
+      });
   };
 
   const applyChanges = () => {
@@ -102,7 +111,7 @@ const Main = () => {
     );
   }
 
-  let description, contents;
+  let description, contents, button;
 
   if (task === "color") {
     description = (
@@ -124,7 +133,7 @@ const Main = () => {
           >
             <img className="w-full" src="/sky2.png" />
           </div>
-          <div
+          {/* <div
             style={{
               backgroundColor: colors?.grassColor
                 ? buildRGBA(colors.grassColor)
@@ -133,12 +142,12 @@ const Main = () => {
             }}
           >
             <img className="w-full" src="/grass.png" />
-          </div>
-          {/* <div className="" style={{ marginTop: "-25px" }}>
+          </div> */}
+          <div className="" style={{ marginTop: "-25px" }}>
             <Grass
               color={colors?.grassColor ? buildRGBA(colors.grassColor) : "#fff"}
             />
-          </div> */}
+          </div>
 
           <>
             <p className="text-pnpl text-sm">
@@ -156,6 +165,16 @@ const Main = () => {
         </div>
       </div>
     );
+    button = (
+      <div className="w-full flex justify-center pb-8">
+        <button
+          className="bg-pnpl text-white font-bold py-2 px-4 rounded-full text-md"
+          onClick={sendButton}
+        >
+          Apply Changes
+        </button>
+      </div>
+    );
   } else if (task === "video") {
     description = (
       <span className=" text-pnpl">
@@ -168,28 +187,30 @@ const Main = () => {
       <div className="">
         <div className="rounded-t-2xl flex flex-col space-y-4">
           <div className="flex flex-col justify-center items-center relative">
-            {recordingState === "none" && <img src="/reference.png" />}
-            {recordingState === "none" && (
+            {(recordingState === "none" || recordingState === "started") && (
+              <img src="/reference.png" />
+            )}
+            {/* {recordingState === "none" && (
               <div className="absolute">
                 <div className="w-24 h-24" onClick={handlePlay}>
                   <PlayButton />
                 </div>
               </div>
-            )}
+            )} */}
             {recordingState === "started" && (
               <div className="absolute">
                 <CountdownCircleTimer
                   isPlaying
                   duration={5}
-                  colors={["#fff"]}
+                  colors={["rgba(0,0,0,0)"]}
                   onComplete={() => {
                     setRecordingState("recording");
                   }}
-                  size={100}
-                  width={2}
+                  size={0}
+                  width={0}
                 >
                   {({ remainingTime }) => (
-                    <span className="text-white text-4xl font-bold">
+                    <span className="text-yellow-pnpl text-9xl font-bold">
                       {remainingTime}
                     </span>
                   )}
@@ -197,15 +218,25 @@ const Main = () => {
               </div>
             )}
             {recordingState === "recording" && (
-              <>
-                <P5Sketch
-                  isRecording={recordingState === "recording"}
-                  recordingComplete={(blob) => {
-                    setBlob(blob);
-                  }}
-                />
+              <div className="position-relative">
+                <div className="w-content overflow-x-hidden">
+                  <P5Sketch
+                    isRecording={recordingState === "recording"}
+                    recordingComplete={(blob) => {
+                      setBlob(blob);
+                    }}
+                  />
 
-                <div
+                  <div className="absolute top-0 left-0 flex space-x-4">
+                    <div
+                      className="h-4 bg-yellow-pnpl"
+                      style={{
+                        width: `${Math.min(seconds / 20000, 1) * 326}px`,
+                      }}
+                    ></div>
+                  </div>
+
+                  {/* <div
                   className="absolute top-px right-px flex space-x-4"
                   onClick={() => {
                     setRecordingState("stopped");
@@ -215,13 +246,46 @@ const Main = () => {
                     <span className="text-white">stop recording</span>
                   </div>
                   <span className="text-white">{formatTime(seconds)}</span>
+                </div> */}
                 </div>
-              </>
+              </div>
             )}
           </div>
         </div>
       </div>
     );
+    if (recordingState === "none") {
+      button = (
+        <div className="w-full flex justify-center pb-8">
+          <button
+            className="bg-pnpl text-white font-bold py-2 px-4 rounded-full text-md"
+            onClick={handlePlay}
+          >
+            Start Scan
+          </button>
+        </div>
+      );
+    } else {
+      button = (
+        <div className="w-full flex pb-8 space-x-2 justify-center">
+          <button
+            className="bg-pink-pnpl text-white font-bold py-2 px-4 rounded-full text-md"
+            onClick={editButton}
+          >
+            Edit
+          </button>
+          <button
+            className="bg-pnpl text-white font-bold py-2 px-4 rounded-full text-md"
+            onClick={() => {
+              setRecordingState("stopped");
+              sendButton();
+            }}
+          >
+            Apply Changes
+          </button>
+        </div>
+      );
+    }
   }
 
   console.log(contents);
@@ -238,14 +302,7 @@ const Main = () => {
         description={description}
         contents={contents}
       />
-      <div className="w-full flex justify-center pb-8">
-        <button
-          className="bg-pnpl text-white font-bold py-2 px-4 rounded-full text-md"
-          onClick={sendButton}
-        >
-          Apply Changes
-        </button>
-      </div>
+      {button}
     </div>
   );
 };

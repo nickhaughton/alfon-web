@@ -15,6 +15,8 @@ module.exports = {
         "task-btn": "#8C62AD",
         "counter-bg": "#CBE2F7",
         border: "#E7E7E7",
+        "yellow-pnpl": "#DCC98C",
+        "pink-pnpl": "#AE8EC7",
       },
     },
   },

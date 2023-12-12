@@ -62,7 +62,7 @@ export const P5Sketch = ({ isRecording, recordingComplete }) => {
       let skeleton;
 
       p.setup = () => {
-        p.createCanvas(336, 490);
+        p.createCanvas(326, 490);
         p.frameRate(30);
         video = p.createCapture(p.VIDEO);
         video.hide();
