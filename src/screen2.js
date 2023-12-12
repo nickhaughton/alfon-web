@@ -14,7 +14,8 @@ const Main = () => {
 
   const [view, setView] = useState("edit");
 
-  const [task, setTask] = useState("color");
+  //   const [task, setTask] = useState("color");
+  const [task, setTask] = useState("video");
 
   const [recordingState, setRecordingState] = useState("none");
   const [seconds, setSeconds] = useState(0);
@@ -123,11 +124,21 @@ const Main = () => {
           >
             <img className="w-full" src="/sky2.png" />
           </div>
-          <div className="" style={{ marginTop: "-25px" }}>
+          <div
+            style={{
+              backgroundColor: colors?.grassColor
+                ? buildRGBA(colors.grassColor)
+                : "#fff",
+              marginTop: "-25px",
+            }}
+          >
+            <img className="w-full" src="/grass.png" />
+          </div>
+          {/* <div className="" style={{ marginTop: "-25px" }}>
             <Grass
               color={colors?.grassColor ? buildRGBA(colors.grassColor) : "#fff"}
             />
-          </div>
+          </div> */}
 
           <>
             <p className="text-pnpl text-sm">

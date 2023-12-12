@@ -29,29 +29,29 @@ export const P5Sketch = ({ isRecording, recordingComplete }) => {
     recordingComplete(blob);
   }
 
-  useEffect(() => {
-    if (isRecording) {
-      let stream = document.querySelector("canvas").captureStream(30);
-      let r = new MediaRecorder(stream);
-      r.ondataavailable = (e) => {
-        console.log(e.data.size);
+  // useEffect(() => {
+  //   if (isRecording) {
+  //     let stream = document.querySelector("canvas").captureStream(30);
+  //     let r = new MediaRecorder(stream);
+  //     r.ondataavailable = (e) => {
+  //       console.log(e.data.size);
 
-        if (e.data.size) {
-          const newChunks = chunks;
-          newChunks.push(e.data);
-          setChunks(newChunks);
-        }
-      };
-      r.start(100);
-      // r.onstop = exportVideo;
-      setRecorder(r);
-    } else if (recorder) {
-      console.log("here");
-      recorder.stop();
-      exportVideo();
-      // setRecorder(null);
-    }
-  }, [isRecording]);
+  //       if (e.data.size) {
+  //         const newChunks = chunks;
+  //         newChunks.push(e.data);
+  //         setChunks(newChunks);
+  //       }
+  //     };
+  //     r.start(100);
+  //     // r.onstop = exportVideo;
+  //     setRecorder(r);
+  //   } else if (recorder) {
+  //     console.log("here");
+  //     recorder.stop();
+  //     exportVideo();
+  //     // setRecorder(null);
+  //   }
+  // }, [isRecording]);
 
   useEffect(() => {
     // Define the sketch using the p5 instance mode
@@ -62,7 +62,7 @@ export const P5Sketch = ({ isRecording, recordingComplete }) => {
       let skeleton;
 
       p.setup = () => {
-        p.createCanvas(window.innerWidth, 375);
+        p.createCanvas(336, 490);
         p.frameRate(30);
         video = p.createCapture(p.VIDEO);
         video.hide();
@@ -231,7 +231,7 @@ export const P5Sketch = ({ isRecording, recordingComplete }) => {
         p.translate(video.width, 0); // To mirror the video
         p.scale(-1, 1); // To mirror the video
         p.image(video, 0, 0);
-        p.background("#000");
+        p.background("#484856");
 
         if (!pose) return;
 

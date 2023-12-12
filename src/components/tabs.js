@@ -60,7 +60,7 @@ export function Tabs({
                 tab.name === currentColor
                   ? "bg-pnpl text-white"
                   : "text-gray-500 hover:text-gray-700",
-                "rounded-md px-2 py-2 text-sm font-medium"
+                "rounded-md px-2 py-2 text-sm font-medium uppercase"
               )}
               onClick={() => {
                 handleClick(tab);
@@ -75,7 +75,7 @@ export function Tabs({
       <div className="bg-white py-4 px-4 border border-border w-full flex flex-col rounded-md drop-shadow-sm">
         <div className="flex flex-col w-full space-y-4">
           <Hue color={getCurrentColor()} onChange={setColor} />
-          <Alpha color={getCurrentColor()} onChange={setColor} />
+          {/* <Alpha color={getCurrentColor()} onChange={setColor} /> */}
         </div>
       </div>
     </div>
