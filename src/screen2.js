@@ -123,15 +123,16 @@ const Main = () => {
     );
     contents = (
       <div className="">
-        <div className="rounded-t-2xl flex flex-col space-y-4">
+        <div className="rounded-t-2xl flex flex-col space-y-4  rounded-xl">
           <div
             style={{
               backgroundColor: colors?.skyColor
                 ? buildRGBA(colors.skyColor)
                 : "#484856",
             }}
+            className=" rounded-t-xl"
           >
-            <img className="w-full" src="/sky2.png" />
+            <img className="w-full  rounded-t-xl" src="/sky2.png" />
           </div>
           {/* <div
             style={{
@@ -187,10 +188,10 @@ const Main = () => {
 
     contents = (
       <div className="">
-        <div className="rounded-t-2xl flex flex-col space-y-4">
+        <div className="rounded-t-2xl flex flex-col space-y-4 overflow-hidden">
           <div className="flex flex-col justify-center items-center relative">
             {(recordingState === "none" || recordingState === "started") && (
-              <img src="/reference.png" />
+              <img src="/reference.png" className=" rounded-xl" />
             )}
             {/* {recordingState === "none" && (
               <div className="absolute">
@@ -221,7 +222,7 @@ const Main = () => {
             )}
             {recordingState === "recording" && (
               <div className="position-relative">
-                <div className="w-content overflow-x-hidden">
+                <div className="w-content overflow-hidden rounded-xl">
                   <P5Sketch
                     isRecording={recordingState === "recording"}
                     recordingComplete={(blob) => {
@@ -229,7 +230,7 @@ const Main = () => {
                     }}
                   />
 
-                  <div className="absolute top-0 left-0 flex space-x-4">
+                  <div className="absolute top-0 left-0 flex space-x-4 overflow-hidden">
                     <div
                       className="h-4 bg-yellow-pnpl"
                       style={{
