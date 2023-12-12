@@ -102,7 +102,7 @@ const Main = () => {
   }
 
   return (
-    <div className="bg-bg-new w-screen h-screen p-4 py-8 flex flex-col space-y-4">
+    <div className="bg-bg-new w-screen h-screen p-4 py-8 flex flex-col space-y-4 pb-12">
       <div className="w-full flex justify-center">
         <div className="border border-task-btn px-3 rounded-full w-fit h-fit">
           <span className="text-md text-task-btn">Task of the day</span>
