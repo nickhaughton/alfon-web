@@ -14,8 +14,8 @@ const Main = () => {
 
   const [view, setView] = useState("edit");
 
-  //   const [task, setTask] = useState("color");
-  const [task, setTask] = useState("video");
+  const [task, setTask] = useState("color");
+  //   const [task, setTask] = useState("video");
 
   const [recordingState, setRecordingState] = useState("none");
   const [seconds, setSeconds] = useState(0);
