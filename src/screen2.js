@@ -102,12 +102,12 @@ const Main = () => {
   }
 
   return (
-    <div className="bg-bg-new w-screen h-screen p-4 py-8 flex flex-col space-y-4 pb-12">
-      <div className="w-full flex justify-center">
+    <div className="bg-bg-new w-screen h-screen p-4 py-8 flex flex-col space-y-4 pb-18">
+      {/* <div className="w-full flex justify-center">
         <div className="border border-task-btn px-3 rounded-full w-fit h-fit">
           <span className="text-md text-task-btn">Task of the day</span>
         </div>
-      </div>
+      </div> */}
       <Wrapper
         step={1}
         description={
@@ -154,7 +154,7 @@ const Main = () => {
           </div>
         }
       />
-      <div className="w-full flex justify-center">
+      <div className="w-full flex justify-center pb-12">
         <button
           className="bg-pnpl text-white font-bold py-2 px-4 rounded-full text-md"
           onClick={sendButton}
